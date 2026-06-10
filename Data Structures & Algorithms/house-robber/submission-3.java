@@ -1,0 +1,32 @@
+class Solution {
+    
+    public int rob(int[] nums) {
+        int n = nums.length;
+
+        int[] dp = new int[n];
+        Arrays.fill(dp,-1);
+
+        System.out.println(Arrays.toString(dp));
+
+        return help(nums,n-1,dp);
+    }
+
+
+    public int help(int[] nums,int idx,int[] dp){
+        if(idx  < 0){
+            return 0;
+        }
+
+        if(idx == 0){
+            return nums[0];
+        }
+
+        if(dp[idx] != -1) return dp[idx];
+
+        int pick = nums[idx] + help(nums,idx-2,dp);
+        int notpick = help(nums,idx-1,dp);
+
+        return dp[idx] = Math.max(pick,notpick); 
+    }
+
+}
